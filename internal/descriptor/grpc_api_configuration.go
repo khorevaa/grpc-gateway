@@ -36,7 +36,7 @@ func registerHTTPRulesFromGrpcAPIService(registry *Registry, service *apiconfig.
 	}
 
 	for _, rule := range service.Http.GetRules() {
-		selector := "." + strings.Trim(rule.GetSelector(), " ")
+		selector := strings.Trim(rule.GetSelector(), " ")
 		if strings.ContainsAny(selector, "*, ") {
 			return fmt.Errorf("selector '%v' in %v must specify a single service method without wildcards", rule.GetSelector(), sourceLogName)
 		}
