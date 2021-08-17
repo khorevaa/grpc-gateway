@@ -349,6 +349,10 @@ func (r *Registry) UnboundExternalHTTPRules() []string {
 	}
 
 	var missingMethods []string
+	if len(allServiceMethods) == 0 {
+		return missingMethods
+	}
+
 	for httpRuleMethod := range r.externalHTTPRules {
 		if _, ok := allServiceMethods[httpRuleMethod]; !ok {
 			missingMethods = append(missingMethods, httpRuleMethod)
